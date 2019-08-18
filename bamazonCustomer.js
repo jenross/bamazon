@@ -12,7 +12,7 @@ const connection = mysql.createConnection({
   user: "root",
 
   // Your password
-  password: "",
+  password: "P@tchjenjase0318",
   database: "bamazon_db"
 });
 
@@ -60,6 +60,12 @@ function whatToBuy() {
           if (results[i].id === answer.productID) {
             chosenProduct = results[i];
           }
+        }
+        if (chosenProduct.stock_quantity < answer.units) {
+          console.log("Insufficient quantity!");
+        } else {
+          console.log("Congratulations, your order is being placed!");
+          
         }
       })
     })
