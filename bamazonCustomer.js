@@ -12,7 +12,7 @@ const connection = mysql.createConnection({
   user: "root",
 
   // Your password
-  password: "P@tchjenjase0318",
+  password: "",
   database: "bamazon_db"
 });
 
@@ -65,9 +65,28 @@ function whatToBuy() {
           console.log("Insufficient quantity!");
         } else {
           console.log("Congratulations, your order is being placed!");
-          
+          updatedStockQuantity = chosenProduct.stock_quantity - answer.units;
+          console.log(updatedStockQuantity);
+          let query = connection.query(
+            "UPDATE products SET ? WHERE ?",
+            [
+              {
+                stock_quantity: updatedStockQuantity 
+              },
+              {
+                product_name: chosenProduct.product_name
+              }
+            ],
+            function(err, res) {
+              if (err) throw err;
+              console.log(res.affectedRows + " products updated!\n");
+            }
+          );
+        
+          // logs the actual query being run
+          console.log(query.sql);
         }
       })
     })
-    connection.end();
+    // connection.end();
 }
