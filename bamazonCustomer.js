@@ -34,6 +34,7 @@ function showAllProducts() {
     console.log("************************************************************************************");
   });
   whatToBuy();
+  // connection.end();
 }
 
 function whatToBuy() {
@@ -45,7 +46,7 @@ function whatToBuy() {
         {
         name: "productID",
         type: "number",
-        message: "Enter the ID# for the product you would like to buy"
+        message: "Enter the #ID for the product you would like to buy:"
         },
         {
         name: "units",
@@ -82,9 +83,10 @@ function whatToBuy() {
               console.log(res.affectedRows + " products updated!\n");
             }
           );
-        
           // logs the actual query being run
           console.log(query.sql);
+          let cost = answer.units * chosenProduct.price; 
+          console.log("Your total cost is: " + cost);
         }
       })
     })
