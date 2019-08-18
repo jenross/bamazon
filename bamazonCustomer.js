@@ -12,7 +12,7 @@ const connection = mysql.createConnection({
   user: "root",
 
   // Your password
-  password: "",
+  password: "P@tchjenjase0318",
   database: "bamazon_db"
 });
 
@@ -20,7 +20,7 @@ const connection = mysql.createConnection({
 connection.connect(function(err) {
   if (err) throw err;
   // run the start function after the connection is made to prompt the user
-  console.log("We are connected");
+  // console.log("We are connected");
   showAllProducts(); 
 });
 
@@ -28,13 +28,12 @@ function showAllProducts() {
   connection.query("SELECT * FROM products", function(err, res) {
     if (err) throw err;
     for (var i = 0; i < res.length; i++) {
-      console.log("------------------------------------------------------------------------------------");
-      console.log(res[i].id + " | " + res[i].product_name + " | " + res[i].department_name + " | " + "$" + res[i].price + " | " + res[i].stock_quantity);
+      console.log("-------------------------------------------------------------------------------------------");
+      console.log("ID: " + res[i].id + " | " + "Product: " + res[i].product_name + " | " + "Dept: " + res[i].department_name + " | " + "$" + res[i].price + " | " + "# In-Stock: " + res[i].stock_quantity);
     }
     console.log("************************************************************************************");
   });
   whatToBuy();
-  // connection.end();
 }
 
 function whatToBuy() {
@@ -46,12 +45,12 @@ function whatToBuy() {
         {
         name: "productID",
         type: "number",
-        message: "Enter the #ID for the product you would like to buy:"
+        message: "Enter the ID for the product you would like to buy:"
         },
         {
         name: "units",
         type: "number",
-        message: "How many units of the product would you like to buy?"
+        message: "How many would you like to buy?"
         }
       ])
       .then(function(answer) {
@@ -65,10 +64,10 @@ function whatToBuy() {
         if (chosenProduct.stock_quantity < answer.units) {
           console.log("Insufficient quantity!");
         } else {
-          console.log("Congratulations, your order is being placed!");
+          console.log("Congratulations, your order was placed!");
           updatedStockQuantity = chosenProduct.stock_quantity - answer.units;
-          console.log(updatedStockQuantity);
-          let query = connection.query(
+          // console.log(updatedStockQuantity);
+          connection.query(
             "UPDATE products SET ? WHERE ?",
             [
               {
@@ -78,17 +77,17 @@ function whatToBuy() {
                 product_name: chosenProduct.product_name
               }
             ],
-            function(err, res) {
+            function(err) {
               if (err) throw err;
-              console.log(res.affectedRows + " products updated!\n");
+              // console.log(res.affectedRows + " products updated!\n");
+              connection.end();
             }
           );
           // logs the actual query being run
-          console.log(query.sql);
+          // console.log(query.sql);
           let cost = answer.units * chosenProduct.price; 
-          console.log("Your total cost is: " + cost);
+          console.log("Your total cost is: " + "$" + cost);
         }
       })
     })
-    // connection.end();
 }
