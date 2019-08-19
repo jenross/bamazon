@@ -38,16 +38,22 @@ function menuOptions() {
           },
         ])
         .then(function(answer) {
-          // get the information of the chosen item
-          // console.log(answer);
-          if(answer.options === 'View Products for Sale') {
-            viewProducts();
-          } else if (answer.options === 'View Low Inventory') {
-            viewLowInventory();
-          } else if (answer.options === 'Add to Inventory') {
-            addInventory();
-          } else if (answer.options === 'Add New Product') {
-            addNewProduct();
+          switch(answer.options) {
+            case 'View Products for Sale':
+              viewProducts();
+              break;
+
+            case 'View Low Inventory':
+              viewLowInventory();
+              break; 
+
+            case 'Add to Inventory':
+              addInventory(); 
+              break;
+
+            case 'Add New Product':
+              addNewProduct();
+              break;
           }
         })
     })

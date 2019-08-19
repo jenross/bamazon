@@ -13,13 +13,13 @@ CREATE TABLE products (
 );
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-VALUES ("blink xt2", "smart home", 99.99, 15000),
-       ("kitchenaid mixer", "home & kitchen", 335.29, 2500), 
-       ("bose soundlink headphones", "headphones", 195.18, 10500), 
-       ("paper mate felt tip pens", "office & school supplies", 9.96, 25600),
-       ("echo dot", "smart home", 29.99, 28300), 
-       ("apple airpods", "headphones", 144.52, 1500), 
-       ("martin smith ukulele", "musical instruments", 19.99, 1300), 
-       ("jameson guitars 5-string banjo", "musical instruments", 154.95, 4200),
-       ("samsung 50-inch smart tv", "television & video", 397.99, 675), 
-       ("ring doorbell", "smart home", 99.99, 9400);
+VALUES ("Blink XT2", "Smart Home", 99.99, 15000),
+       ("Kitchenaid Mixer", "Home & Kitchen", 335.29, 2500), 
+       ("Bose Soundlink Headphones", "Headphones", 195.18, 10500), 
+       ("Paper Mate felt tip pens", "Office & School Supplies", 9.96, 25600),
+       ("Echo Dot", "Smart Home", 29.99, 28300), 
+       ("Apple Airpods", "Headphones", 144.52, 4), 
+       ("Martin Smith Ukulele", "Musical Instruments", 19.99, 1300), 
+       ("Jameson Guitars 5-string Banjo", "Musical Instruments", 154.95, 4200),
+       ("Samsung 50-inch Smart TV", "Television & Video", 397.99, 675), 
+       ("Ring Doorbell", "Smart Home", 99.99, 9400);
