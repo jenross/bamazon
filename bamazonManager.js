@@ -25,7 +25,7 @@ connection.connect(function(err) {
 });
 
 function menuOptions() {
-    connection.query("SELECT * FROM products", function(err, results) {
+    connection.query("SELECT * FROM products", function(err) {
       if (err) throw err;
   
       inquirer
@@ -39,7 +39,7 @@ function menuOptions() {
         ])
         .then(function(answer) {
           // get the information of the chosen item
-          console.log(answer);
+          // console.log(answer);
           if(answer.options === 'View Products for Sale') {
             connection.query("SELECT * FROM products", function(err, res) {
               if (err) throw err;
@@ -48,6 +48,7 @@ function menuOptions() {
                 console.log("ID: " + res[i].id + " | " + "Product: " + res[i].product_name + " | " + "Dept: " + res[i].department_name + " | " + "$" + res[i].price + " | " + "# In-Stock: " + res[i].stock_quantity);
               }
               console.log("************************************************************************************");
+              connection.end();
             });
           } else if (answer.options === 'View Low Inventory') {
             connection.query("SELECT * FROM products", function(err, res) {
@@ -59,42 +60,54 @@ function menuOptions() {
                 }
               }
               console.log("************************************************************************************");
+              connection.end();
             });
-          }
-          // let chosenProduct;
-          // for (var i = 0; i < results.length; i++) {
-          //   if (results[i].id === answer.productID) {
-          //     chosenProduct = results[i];
-          //   }
-          // }
-      //     if (chosenProduct.stock_quantity < answer.units) {
-      //       console.log("Insufficient quantity!");
-      //     } else {
-      //       console.log("Congratulations, your order was placed!");
-      //       updatedStockQuantity = chosenProduct.stock_quantity - answer.units;
-      //       // console.log(updatedStockQuantity);
-      //       connection.query(
-      //         "UPDATE products SET ? WHERE ?",
-      //         [
-      //           {
-      //             stock_quantity: updatedStockQuantity 
-      //           },
-      //           {
-      //             product_name: chosenProduct.product_name
-      //           }
-      //         ],
-      //         function(err) {
-      //           if (err) throw err;
-      //           // console.log(res.affectedRows + " products updated!\n");
-      //           connection.end();
-      //         }
-      //       );
-      //       // logs the actual query being run
-      //       // console.log(query.sql);
-      //       let cost = answer.units * chosenProduct.price; 
-      //       console.log("Your total cost is: " + "$" + cost);
-      //     }
-        })
+          } else if (answer.options === 'Add to Inventory') {
+            connection.query("SELECT * FROM products", function(err, results) {
+              if (err) throw err;
+              inquirer
+              .prompt([
+                {
+                name: "addMoreID",
+                type: "number",
+                message: "Enter the ID for the product you would like to increase the quantity of:"
+                },
+                {
+                name: "addMoreAmount",
+                type: "number",
+                message: "How many would you like to add?"
+                },
+              ])
+              .then(function(answer) {
+                let chosenProduct;
+                for (var i = 0; i < results.length; i++) {
+                  if (results[i].id === answer.addMoreID) {
+                    chosenProduct = results[i];
+                  }
+                }
+                updatedStockQuantity = chosenProduct.stock_quantity + answer.addMoreAmount;
+            
+                let query = connection.query(
+                  "UPDATE products SET ? WHERE ?",
+                  [
+                    {
+                      stock_quantity: updatedStockQuantity 
+                    },
+                    {
+                      product_name: chosenProduct.product_name
+                    }
+                  ],
+                  function(err) {
+                    if (err) throw err;
+                    connection.end();
+                  }
+                );
+                console.log(query.sql);
+              })
+            })
+         
+        }
       });
+  });
 }
 
