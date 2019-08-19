@@ -49,6 +49,17 @@ function menuOptions() {
               }
               console.log("************************************************************************************");
             });
+          } else if (answer.options === 'View Low Inventory') {
+            connection.query("SELECT * FROM products", function(err, res) {
+              if (err) throw err;
+              for (var i = 0; i < res.length; i++) {
+                if (res[i].stock_quantity < 5) {
+                  console.log("-------------------------------------------------------------------------------------------");
+                  console.log("ID: " + res[i].id + " | " + "Product: " + res[i].product_name + " | " + "Dept: " + res[i].department_name + " | " + "$" + res[i].price + " | " + "# In-Stock: " + res[i].stock_quantity);
+                }
+              }
+              console.log("************************************************************************************");
+            });
           }
           // let chosenProduct;
           // for (var i = 0; i < results.length; i++) {
