@@ -119,7 +119,7 @@ function addInventory() {
             connection.end();
           }
         );
-        // console.log(query.sql);
+        console.log(chosenProduct.product_name + " stock quantity has been updated to " + updatedStockQuantity);
       })
     })
 }
@@ -162,7 +162,7 @@ function addNewProduct() {
                 connection.end();
               }
             );
-            // console.log(query.sql);
+            console.log(answer.newProductName + " has been added to the database!");
           })
 }
 
