@@ -74,7 +74,7 @@ function whatToBuy() {
           console.log("Congratulations, your order was placed!");
           let updatedStockQuantity = chosenProduct.stock_quantity - answer.units;
           let updatedProductSales = answer.units * chosenProductPrice; 
-          console.log(updatedProductSales);
+          console.log(updatedProductSales.toFixed(2));
           connection.query(
             "UPDATE products SET ? WHERE ?",
             [

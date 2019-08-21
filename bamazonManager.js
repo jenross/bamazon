@@ -1,5 +1,6 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
+const Table = require('cli-table');
 
 // create the connection information for the sql database
 const connection = mysql.createConnection({
@@ -61,12 +62,15 @@ function menuOptions() {
 
 function viewProducts() {
   connection.query("SELECT * FROM products", function(err, res) {
-  if (err) throw err;
+    if (err) throw err;
+    const table = new Table({
+      head: ['ID', 'Product', 'Department', 'Price', 'In Stock', 'Product Sales'],
+      colWidths: [10, 30, 15, 10, 10, 15]
+    });
       for (var i = 0; i < res.length; i++) {
-          console.log("-------------------------------------------------------------------------------------------");
-          console.log("ID: " + res[i].id + " | " + "Product: " + res[i].product_name + " | " + "Dept: " + res[i].department_name + " | " + "$" + res[i].price + " | " + "# In-Stock: " + res[i].stock_quantity);
+        table.push([res[i].id, res[i].product_name, res[i].department_name, res[i].price, res[i].stock_quantity, res[i].product_sales]);
       }
-      console.log("************************************************************************************");
+      console.log(table.toString());
       connection.end();
   });
 }
@@ -74,13 +78,16 @@ function viewProducts() {
 function viewLowInventory() {
   connection.query("SELECT * FROM products", function(err, res) {
       if (err) throw err;
+      const table = new Table({
+        head: ['ID', 'Product', 'Department', 'Price', 'In Stock', 'Product Sales'],
+        colWidths: [10, 30, 15, 10, 10, 15]
+      });
       for (var i = 0; i < res.length; i++) {
         if (res[i].stock_quantity < 5) {
-          console.log("-------------------------------------------------------------------------------------------");
-          console.log("ID: " + res[i].id + " | " + "Product: " + res[i].product_name + " | " + "Dept: " + res[i].department_name + " | " + "$" + res[i].price + " | " + "# In-Stock: " + res[i].stock_quantity);
+          table.push([res[i].id, res[i].product_name, res[i].department_name, res[i].price, res[i].stock_quantity, res[i].product_sales]);
         }
       }
-      console.log("************************************************************************************");
+      console.log(table.toString());
       connection.end();
     });
 }
