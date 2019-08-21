@@ -31,3 +31,7 @@ CREATE TABLE departments (
   over_head_costs INT,
   PRIMARY KEY (department_id)
 );
+
+INSERT INTO departments (department_name, over_head_costs)
+VALUES ("Smart Home", 15000),
+       ("Home & Kitchen", 7500);
