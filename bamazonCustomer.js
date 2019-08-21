@@ -33,17 +33,9 @@ function showAllProducts() {
       colWidths: [10, 30, 15, 10, 10, 15]
     });
     for (var i = 0; i < res.length; i++) {
-      // const table = new Table({
-      //   head: ['ID', 'Product', 'Department', 'Price', 'In Stock', 'Product Sales'],
-      //   colWidths: [10, 30, 15, 10, 10, 15]
-      // });
       table.push([res[i].id, res[i].product_name, res[i].department_name, res[i].price, res[i].stock_quantity, res[i].product_sales]);
-      // console.log(table.toString());
-      // console.log("-------------------------------------------------------------------------------------------");
-      // console.log("ID: " + res[i].id + " | " + "Product: " + res[i].product_name + " | " + "Dept: " + res[i].department_name + " | " + "$" + res[i].price + " | " + "# In-Stock: " + res[i].stock_quantity + " | " + "Product Sales: " + res[i].product_sales);
     }
     console.log(table.toString());
-    // console.log("************************************************************************************");
   });
   whatToBuy();
 }
@@ -88,7 +80,7 @@ function whatToBuy() {
             [
               {
                 stock_quantity: updatedStockQuantity, 
-                product_sales: updatedProductSales
+                product_sales: updatedProductSales.toFixed(2)
               },
               {
                 product_name: chosenProduct.product_name
@@ -96,14 +88,12 @@ function whatToBuy() {
             ],
             function(err) {
               if (err) throw err;
-              // console.log(res.affectedRows + " products updated!\n");
               connection.end();
             }
           );
-          // logs the actual query being run
-          // console.log(query.sql);
           let cost = answer.units * chosenProduct.price; 
-          console.log("Your total cost is: " + "$" + cost);
+          let shortenedCost = cost.toFixed(2);
+          console.log("Your total cost is: " + "$" + shortenedCost);
         }
       })
     })
