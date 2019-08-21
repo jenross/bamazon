@@ -29,7 +29,7 @@ function showAllProducts() {
     if (err) throw err;
     for (var i = 0; i < res.length; i++) {
       console.log("-------------------------------------------------------------------------------------------");
-      console.log("ID: " + res[i].id + " | " + "Product: " + res[i].product_name + " | " + "Dept: " + res[i].department_name + " | " + "$" + res[i].price + " | " + "# In-Stock: " + res[i].stock_quantity);
+      console.log("ID: " + res[i].id + " | " + "Product: " + res[i].product_name + " | " + "Dept: " + res[i].department_name + " | " + "$" + res[i].price + " | " + "# In-Stock: " + res[i].stock_quantity + " | " + "Product Sales: " + res[i].product_sales);
     }
     console.log("************************************************************************************");
   });
@@ -56,22 +56,27 @@ function whatToBuy() {
       .then(function(answer) {
         // get the information of the chosen item
         let chosenProduct;
+        let chosenProductPrice; 
         for (var i = 0; i < results.length; i++) {
           if (results[i].id === answer.productID) {
             chosenProduct = results[i];
+            chosenProductPrice = results[i].price;
           }
+          // console.log(chosenProductPrice);
         }
         if (chosenProduct.stock_quantity < answer.units) {
           console.log("Insufficient quantity!");
         } else {
           console.log("Congratulations, your order was placed!");
-          updatedStockQuantity = chosenProduct.stock_quantity - answer.units;
-          // console.log(updatedStockQuantity);
+          let updatedStockQuantity = chosenProduct.stock_quantity - answer.units;
+          let updatedProductSales = answer.units * chosenProductPrice; 
+          console.log(updatedProductSales);
           connection.query(
             "UPDATE products SET ? WHERE ?",
             [
               {
-                stock_quantity: updatedStockQuantity 
+                stock_quantity: updatedStockQuantity, 
+                product_sales: updatedProductSales
               },
               {
                 product_name: chosenProduct.product_name
