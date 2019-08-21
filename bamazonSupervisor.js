@@ -51,17 +51,21 @@ function menuOptions() {
     })
   }
 
-function viewProductSales() {
-    connection.query("SELECT * FROM products", function(err, res) {
-        if (err) throw err;
-        for (var i = 0; i < res.length; i++) {
-            console.log("-------------------------------------------------------------------------------------------");
-            console.log("department_id: " + res[i].department_id + " | " + "department_name: " + res[i].department_name + " | " + "over_head_costs: " + res[i].over_head_costs + " | " + "product_sales " + " | " + "total_profit ");
-        }
-        console.log("************************************************************************************");
-        });
-}
+// function viewProductSales() {
+//     let query = "SELECT departments.deparment_id, departments.department_name, departments.over_head_costs, products.department_name, products.product_sales ";
+//      query += "FROM products INNER JOIN departments ON (products.department_name = departments.department_name ";
+//      query += "WHERE (products.department_name = ? AND departments.department_name = ?)"; 
+//      connection.query(query, function(err, res) {
+//         // console.log(res.length + " matches found!");
+//         if (err) throw err;
+//         for (var i = 0; i < res.length; i++) {
+//             console.log("-------------------------------------------------------------------------------------------");
+//             console.log("department_id: " + res[i].department_id + " | " + "department_name: " + res[i].department_name + " | " + "over_head_costs: " + res[i].over_head_costs + " | " + "product_sales " + " | " + "total_profit ");
+//         }
+//         console.log("************************************************************************************");
+//         });
+// }
 
-function createDepartment() {
-    console.log("Getting there.");
-}
+// function createDepartment() {
+//     console.log("Getting there.");
+// }
