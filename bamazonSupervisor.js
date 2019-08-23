@@ -1,5 +1,6 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
+const Table = require('cli-table');
 
 // create the connection information for the sql database
 const connection = mysql.createConnection({
@@ -51,21 +52,27 @@ function menuOptions() {
     })
   }
 
-// function viewProductSales() {
-//     let query = "SELECT departments.deparment_id, departments.department_name, departments.over_head_costs, products.department_name, products.product_sales ";
-//      query += "FROM products INNER JOIN departments ON (products.department_name = departments.department_name ";
-//      query += "WHERE (products.department_name = ? AND departments.department_name = ?)"; 
-//      connection.query(query, function(err, res) {
-//         // console.log(res.length + " matches found!");
-//         if (err) throw err;
-//         for (var i = 0; i < res.length; i++) {
-//             console.log("-------------------------------------------------------------------------------------------");
-//             console.log("department_id: " + res[i].department_id + " | " + "department_name: " + res[i].department_name + " | " + "over_head_costs: " + res[i].over_head_costs + " | " + "product_sales " + " | " + "total_profit ");
-//         }
-//         console.log("************************************************************************************");
-//         });
-// }
+function viewProductSales() {
+    let query = "SELECT departments.department_id, departments.department_name, departments.over_head_costs, SUM(products.product_sales) AS product_sales, (departments.over_head_costs - SUM(products.product_sales)) AS total_profit " 
+    query += "FROM bamazon_db.departments "
+    query += "INNER JOIN products ON departments.department_name = products.department_name "
+    query += "GROUP BY department_id";
+    
+     connection.query(query, function(err, res) {
+        // console.log(res);
+        if (err) throw err;
+        const tableTwo = new Table({
+            head: ['department_id', 'department_name', 'over_head_costs', 'product_sales', 'total_profit'],
+            colWidths: [15, 20, 20, 15, 15]
+        });
+          for (var i = 0; i < res.length; i++) {
+              tableTwo.push([res[i].department_id, res[i].department_name, res[i].over_head_costs, res[i].product_sales, res[i].total_profit]);
+          }
+          console.log(tableTwo.toString());
+          connection.end();
+    });
+}
 
-// function createDepartment() {
-//     console.log("Getting there.");
-// }
+function createDepartment() {
+    console.log("Getting there.");
+}
