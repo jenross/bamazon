@@ -21,7 +21,7 @@ const connection = mysql.createConnection({
 connection.connect(function(err) {
   if (err) throw err;
   // run the start function after the connection is made to prompt the user
-  console.log("We are connected");
+  // console.log("We are connected");
   menuOptions(); 
 });
 
