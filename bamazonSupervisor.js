@@ -1,3 +1,4 @@
+/* eslint-disable */
 const mysql = require("mysql");
 const inquirer = require("inquirer");
 const Table = require('cli-table');
@@ -53,7 +54,7 @@ function menuOptions() {
   }
 
 function viewProductSales() {
-    let query = "SELECT departments.department_id, departments.department_name, departments.over_head_costs, SUM(products.product_sales) AS product_sales, (departments.over_head_costs - SUM(products.product_sales)) AS total_profit " 
+    let query = "SELECT departments.department_id, departments.department_name, departments.over_head_costs, SUM(products.product_sales) AS product_sales, (SUM(products.product_sales) - departments.over_head_costs) AS total_profit " 
     query += "FROM bamazon_db.departments "
     query += "INNER JOIN products ON departments.department_name = products.department_name "
     query += "GROUP BY department_id";
