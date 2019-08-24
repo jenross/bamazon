@@ -1,3 +1,4 @@
+/* eslint-disable */
 const mysql = require("mysql");
 const inquirer = require("inquirer");
 const Table = require('cli-table');
