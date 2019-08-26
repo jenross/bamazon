@@ -32,4 +32,4 @@ Bamazon is a command-line application for an Amazon-like storefront. It utilizes
 ### Customer Interface 
 
 1. Run ```node bamazonCustomer.js```. 
-[Terminal GIF demo customer](customer.cast)
+[![asciicast](https://asciinema.org/a/Y8NH33Ds0Lm9fu9f4CBU5gWO7.svg)](https://asciinema.org/a/Y8NH33Ds0Lm9fu9f4CBU5gWO7)
