@@ -34,4 +34,6 @@ Bamazon is a command-line application for an Amazon-like storefront. It utilizes
 
 1. Run `node bamazonCustomer.js` in your CLI/Terminal.
 
-[![asciicast](https://asciinema.org/a/Y8NH33Ds0Lm9fu9f4CBU5gWO7.svg?autoplay=1)](https://asciinema.org/a/Y8NH33Ds0Lm9fu9f4CBU5gWO7?autoplay=1)
+<script id="asciicast-Y8NH33Ds0Lm9fu9f4CBU5gWO7" src="https://asciinema.org/a/Y8NH33Ds0Lm9fu9f4CBU5gWO7.js" async data-autoplay="true"></script>
+
+### Manager Interface
