@@ -27,10 +27,11 @@ Bamazon is a command-line application for an Amazon-like storefront. It utilizes
 4. Open your computer's Command Line Interpreter (CLI) and navigate to the folder/directory where you would like to save and run this application.
 5. Run `git clone https://github.com/jenross/bamazon.git`.
 6. Navigate to the directory for the project (`cd Bamazon`).
-7. Run `npm install` to download all of the required node modules.
+7. Open the project's JavaScript files in your code editor and add the password you are using for your MySQL client to link to the database (line 17 on each file). 
+8. Run `npm install` to download all of the required node modules.
 
 ### Customer Interface
 
-1. Run `node bamazonCustomer.js`.
+1. Run `node bamazonCustomer.js` in your CLI/Terminal.
 
-[![asciicast autoplay](https://asciinema.org/a/Y8NH33Ds0Lm9fu9f4CBU5gWO7.svg)](https://asciinema.org/a/Y8NH33Ds0Lm9fu9f4CBU5gWO7)
+[![asciicast](https://asciinema.org/a/Y8NH33Ds0Lm9fu9f4CBU5gWO7.svg?autoplay=1)](https://asciinema.org/a/Y8NH33Ds0Lm9fu9f4CBU5gWO7?autoplay=1)
